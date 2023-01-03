@@ -1,13 +1,14 @@
 import React from "react";
 import { Flex, Text, CardContent, Spacer, Link } from 'vcc-ui';
 import Image from 'next/image'
+
 import { CarType } from "../../../types/car";
 
 type CarCardPropsType = {
   carInfo: CarType
 }
 
-export const CarCard = ({
+const CarCard = ({
   carInfo
 }: CarCardPropsType) => {
 
@@ -75,3 +76,5 @@ export const CarCard = ({
     </Flex >
   );
 };
+
+export default CarCard

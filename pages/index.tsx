@@ -1,10 +1,13 @@
-import { CardCarousel } from "../src/components/CardCarousel";
 import { StyleProvider, ThemePicker } from 'vcc-ui';
 import React, { useEffect, useState } from "react";
-import { CarType } from "../types/car";
-import { CarCard } from "../src/components/CarCard";
-import { useScreenSizeDetection } from "../src/helpers/screenSizeDetection";
+
+import CardCarousel from "../src/components/CardCarousel";
+import CarCard from "../src/components/CarCard";
+
 import { CardCarouselChildrenType } from "../types/cardCarouselChildren";
+import { CarType } from "../types/car";
+import { useScreenSizeDetection } from "../src/helpers/screenSizeDetection";
+
 
 
 const HomePage = () => {
