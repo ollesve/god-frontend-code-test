@@ -44,13 +44,12 @@ export const CarCard = ({
       </CardContent>
       <Flex
         extend={{
-          flexDirection: "row",
           position: "relative",
           width: "100%",
-          height: "100%",
+          padding: "0 0 75% 0"
         }}
       >
-        <Image src={`${carInfo.imageUrl}`} alt={`Image of volvo car of model ${carInfo.modelName}`} priority layout='fill' objectFit='contain' />
+        <Image src={`${carInfo.imageUrl}`} alt={`Volvo car ${carInfo.bodyType} of model ${carInfo.modelName}`} layout='fill' objectFit='contain' />
       </Flex>
       <Flex
         extend={{

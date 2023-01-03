@@ -3,15 +3,13 @@ import { StyleProvider, ThemePicker } from 'vcc-ui';
 import React, { useEffect, useState } from "react";
 import { CarType } from "../types/car";
 import { CarCard } from "../src/components/CarCard";
-import { useDeviceDetection } from "../src/helpers/deviceDetection";
+import { useScreenSizeDetection } from "../src/helpers/screenSizeDetection";
+import { CardCarouselChildrenType } from "../types/cardCarouselChildren";
 
-type CarCardPropsType = {
-  props: { carInfo: CarType }
-}
 
 export default function HomePage() {
   const [carInfoArray, setCarInfoArray] = useState<CarType[]>([])
-  const device = useDeviceDetection() //TODO: Använd S, L, M
+  const screenSize = useScreenSizeDetection()
 
   useEffect(() => {
     async function fetchData() {
@@ -23,8 +21,7 @@ export default function HomePage() {
   }, [])
 
 
-  function searchFunction(children: CarCardPropsType[], input: string) { //TODO: Bättre typ?
-
+  function searchFunction(children: CardCarouselChildrenType[], input: string) {
     return children.filter((card) => {
       return card.props.carInfo.modelName.toLowerCase().includes(input.toLowerCase())
     })
@@ -34,7 +31,7 @@ export default function HomePage() {
     <React.StrictMode>
       <StyleProvider>
         <ThemePicker variant="light">
-          <CardCarousel device={device} searchFunction={searchFunction}>
+          <CardCarousel screenSize={screenSize} searchFunction={searchFunction}>
             {carInfoArray.map(carInfo => <CarCard key={`car-${carInfo.id}`} carInfo={carInfo} />)}
           </CardCarousel>
         </ThemePicker>

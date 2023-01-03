@@ -1,10 +1,9 @@
 import { useState, useEffect, memo } from "react";
-import { DeviceType } from "../../types/device";
-import { useTheme } from "vcc-ui";
+import { ScreenSizeType } from "../../types/screenSize";
 
 
 
-export const useDeviceDetection = (): DeviceType => {
+export const useScreenSizeDetection = (): ScreenSizeType => {
 
   const [width, setWidth] = useState<number>(1000);
 
@@ -22,10 +21,12 @@ export const useDeviceDetection = (): DeviceType => {
   }, []);
 
   if (width < 480) {
-    return "mobile"
-  } else if (width > 1024) {
-    return "desktop"
+    return "S"
+  } else if (width >= 480 && width < 1024) {
+    return "M"
+  } else if (width >= 1024 && width < 1600) {
+    return "L"
   } else {
-    return "tablet"
+    return "XL"
   }
 }
