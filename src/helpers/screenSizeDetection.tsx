@@ -11,7 +11,7 @@ export const useScreenSizeDetection = (): ScreenSizeType => {
   useEffect(() => {
     setWidth(window.innerWidth);
 
-    function handleWindowSizeChange() {
+    const handleWindowSizeChange = () => {
       setWidth(window.innerWidth);
     }
     window.addEventListener('resize', handleWindowSizeChange);

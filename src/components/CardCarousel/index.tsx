@@ -69,7 +69,7 @@ export const CardCarousel = ({ children, screenSize, searchFunction }: CardCarou
   }
 
   const search = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!searchFunction) return
+    if (typeof searchFunction !== "function") return
     const input = e.target.value
     setSearchInput(input);
 

@@ -7,12 +7,12 @@ import { useScreenSizeDetection } from "../src/helpers/screenSizeDetection";
 import { CardCarouselChildrenType } from "../types/cardCarouselChildren";
 
 
-export default function HomePage() {
+const HomePage = () => {
   const [carInfoArray, setCarInfoArray] = useState<CarType[]>([])
   const screenSize = useScreenSizeDetection()
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       const response = await fetch("/api/cars.json")
       const data = await response.json()
       setCarInfoArray(data)
@@ -21,7 +21,7 @@ export default function HomePage() {
   }, [])
 
 
-  function searchFunction(children: CardCarouselChildrenType[], input: string) {
+  const searchFunction = (children: CardCarouselChildrenType[], input: string) => {
     return children.filter((card) => {
       return card.props.carInfo.modelName.toLowerCase().includes(input.toLowerCase())
     })
@@ -39,3 +39,5 @@ export default function HomePage() {
     </React.StrictMode>
   );
 }
+
+export default HomePage

@@ -1,6 +1,6 @@
 import "../public/css/styles.css";
 
-function MyApp({ Component, pageProps }: any) {
+const MyApp = ({ Component, pageProps }: any) => {
   return <Component {...pageProps} />
 }
 
