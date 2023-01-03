@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text, CardContent, Spacer, Link } from 'vcc-ui';
+import { Flex, Text, Block, Spacer, Link } from 'vcc-ui';
 import Image from 'next/image'
 
 import { CarType } from "../../../types/car";
@@ -15,10 +15,10 @@ const CarCard = ({
   const { bodyType, modelType, modelName, imageUrl, id } = carInfo
 
   return (
-    <Flex
+    <Block
       extend={{
         scrollSnapAlign: "start",
-        padding: "0 5px",
+        padding: "0 12px",
         onlyS: {
           minWidth: "calc(75% - 10px)"
         },
@@ -30,20 +30,17 @@ const CarCard = ({
         }
       }}
     >
-      <CardContent>
-        <Text>{bodyType}</Text>
-        <Flex extend={{
-          alignItems: "center",
-          textAlign: 'left',
-          flexDirection: "row",
-          height: "32px"
-        }}>
-          <Text subStyle="emphasis">{modelName}</Text>
-          <Spacer />
-          <Text subStyle="inline-link">{modelType}</Text>
-        </Flex>
-
-      </CardContent>
+      <Text>{bodyType.toUpperCase()}</Text>
+      <Flex extend={{
+        alignItems: "center",
+        textAlign: 'left',
+        flexDirection: "row",
+        height: "32px"
+      }}>
+        <Text subStyle="emphasis">{modelName}</Text>
+        <Spacer />
+        <Text subStyle="inline-link">{modelType}</Text>
+      </Flex>
       <Flex
         extend={{
           position: "relative",
@@ -73,7 +70,7 @@ const CarCard = ({
           Shop
         </Link>
       </Flex>
-    </Flex >
+    </Block >
   );
 };
 
