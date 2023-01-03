@@ -15,9 +15,12 @@
     "build": "next build",
     "build-and-dev": "next build && next dev",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen-test": "npx playwright codegen localhost:3000",
+    "test:e2e": "npx playwright test tests --reporter=line"
   },
   "devDependencies": {
+    "@playwright/test": "^1.29.1",
     "@testing-library/react": "^12.1.0",
     "@types/lodash": "^4.14.191",
     "eslint": "^8.0.0",
