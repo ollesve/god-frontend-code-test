@@ -22,8 +22,13 @@ const HomePage = () => {
 
 
   const searchFunction = (children: CardCarouselChildrenType[], input: string) => {
+
     return children.filter((card) => {
-      return card.props.carInfo.modelName.toLowerCase().includes(input.toLowerCase())
+      const carInfo = card.props.carInfo
+      const inputLowerCase = input.toLowerCase()
+      return (carInfo.modelName.toLowerCase().includes(inputLowerCase) ||
+        carInfo.modelType.toLowerCase().includes(inputLowerCase) ||
+        carInfo.bodyType.toLowerCase().includes(inputLowerCase))
     })
   }
 
