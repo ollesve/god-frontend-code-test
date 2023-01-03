@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Flex, TextInput, Block } from 'vcc-ui';
+
 import CardToogle from "./CardToogle";
 import CarouselBullets from "./CarouselBullets";
-import { ScreenSizeType } from "../../../types/screenSize";
 import { CardCarouselChildrenType } from "../../../types/cardCarouselChildren";
+import { ScreenSizeType } from "../../../types/screenSize";
+
 
 
 type CardCarouselPropsType = {
@@ -24,21 +26,20 @@ const getElementsInCarousel = (screenSize: ScreenSizeType) => {
 }
 
 
-export const CardCarousel = ({ children, screenSize, searchFunction }: CardCarouselPropsType) => {
+const CardCarousel = ({ children, screenSize, searchFunction }: CardCarouselPropsType) => {
   const [currentIdx, setCurrentIdx] = useState<number>(0)
   const [previousButtonDisabled, setPreviousButtonDisabled] = useState<boolean>(false)
   const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>(false)
-  const carouselRef = useRef<HTMLDivElement>(null)
-  const elementsInCarousel = getElementsInCarousel(screenSize)
-
   const [searchInput, setSearchInput] = useState('');
   const [filteredChildren, setFilteredChildren] = useState<CardCarouselChildrenType[]>(children);
+
+  const carouselRef = useRef<HTMLDivElement>(null)
+  const elementsInCarousel = getElementsInCarousel(screenSize)
 
 
   useEffect(() => {
     setFilteredChildren(children)
   }, [children])
-
 
   useEffect(() => {
     setTimeout(() => {
@@ -47,17 +48,12 @@ export const CardCarousel = ({ children, screenSize, searchFunction }: CardCarou
     }, 200)
   }, [currentIdx, elementsInCarousel, filteredChildren])
 
-  const nextCard = () => {
-    scrollToCard(currentIdx + elementsInCarousel)
-  }
 
-  const previousCard = () => {
-    scrollToCard(currentIdx - 1)
-  }
+  const nextCard = () => scrollToCard(currentIdx + elementsInCarousel)
 
-  const scrollToCard = (index: number) => {
-    carouselRef.current?.children[index]?.scrollIntoView({ behavior: "smooth", inline: "nearest" })
-  }
+  const previousCard = () => scrollToCard(currentIdx - 1)
+
+  const scrollToCard = (index: number) => carouselRef.current?.children[index]?.scrollIntoView({ behavior: "smooth", inline: "nearest" })
 
   const handleScroll = (event: React.UIEvent) => {
     const element = event.currentTarget;
@@ -69,14 +65,12 @@ export const CardCarousel = ({ children, screenSize, searchFunction }: CardCarou
   }
 
   const search = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!searchFunction) return
+    if (typeof searchFunction !== "function") return
     const input = e.target.value
     setSearchInput(input);
 
     setFilteredChildren(searchFunction(children, input))
   }
-
-
 
   return (
     <Flex

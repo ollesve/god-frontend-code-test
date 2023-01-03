@@ -1,47 +1,45 @@
 import React from "react";
-import { Flex, Text, CardContent, Spacer, Link } from 'vcc-ui';
+import { Flex, Text, Block, Spacer, Link } from 'vcc-ui';
 import Image from 'next/image'
+
 import { CarType } from "../../../types/car";
 
 type CarCardPropsType = {
   carInfo: CarType
 }
 
-export const CarCard = ({
+const CarCard = ({
   carInfo
 }: CarCardPropsType) => {
 
+  const { bodyType, modelType, modelName, imageUrl, id } = carInfo
 
   return (
-    <Flex
+    <Block
       extend={{
         scrollSnapAlign: "start",
-        padding: "0 5px",
+        padding: "0 12px",
         onlyS: {
-          minWidth: "calc(75% - 10px)"
+          minWidth: "calc(75% - 24px)"
         },
         onlyM: {
-          minWidth: "calc(40% - 10px)"
+          minWidth: "calc(40% - 24px)"
         },
         fromL: {
-          minWidth: "calc(25% - 10px)"
+          minWidth: "calc(25% - 24px)"
         }
       }}
     >
-      <CardContent>
-        <Text>{carInfo.bodyType}</Text>
-        <Flex extend={{
-          alignItems: "center",
-          textAlign: 'left',
-          flexDirection: "row",
-          height: "32px"
-        }}>
-          <Text subStyle="emphasis">{carInfo.modelName}</Text>
-          <Spacer />
-          <Text subStyle="inline-link">{carInfo.modelType}</Text>
-        </Flex>
-
-      </CardContent>
+      <Text>{bodyType.toUpperCase()}</Text>
+      <Flex extend={{
+        alignItems: "center",
+        textAlign: 'left',
+        flexDirection: "row",
+      }}>
+        <Text subStyle="emphasis">{modelName}</Text>
+        <Spacer />
+        <Text subStyle="inline-link">{modelType}</Text>
+      </Flex>
       <Flex
         extend={{
           position: "relative",
@@ -49,7 +47,7 @@ export const CarCard = ({
           padding: "0 0 75% 0"
         }}
       >
-        <Image src={`${carInfo.imageUrl}`} alt={`Volvo car ${carInfo.bodyType} of model ${carInfo.modelName}`} layout='fill' objectFit='contain' />
+        <Image src={`${imageUrl}`} alt={`Volvo car ${bodyType} of model ${modelName} which is a ${modelType}`} layout='fill' objectFit='contain' />
       </Flex>
       <Flex
         extend={{
@@ -58,19 +56,21 @@ export const CarCard = ({
         }}
       >
         <Link
-          href={`/learn/${carInfo.id}`}
+          href={`/learn/${id}`}
           arrow="right"
         >
           Learn
         </Link>
         <Spacer size={5} />
         <Link
-          href={`/shop/${carInfo.id}`}
+          href={`/shop/${id}`}
           arrow="right"
         >
           Shop
         </Link>
       </Flex>
-    </Flex >
+    </Block >
   );
 };
+
+export default CarCard

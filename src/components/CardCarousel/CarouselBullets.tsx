@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Flex } from 'vcc-ui';
 
 type CarouselBulletsPropsType = {
@@ -21,7 +22,7 @@ export const CarouselBullets = ({ currentIdx, totalElementsInCarousel }: Carouse
 };
 
 const getBullets = (totalElementsInCarousel: number, currentIdx: number) => {
-  let items = [];
+  let items: JSX.Element[] = [];
 
   for (let i = 0; i < totalElementsInCarousel; i++) {
     items.push(<Flex
