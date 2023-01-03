@@ -1,13 +1,8 @@
-import { HelloWorld } from "../src/components/HelloWorld";
 import "../public/css/styles.css";
-import React from "react";
 
-function HomePage() {
-  return (
-    <React.StrictMode>
-      <HelloWorld />
-    </React.StrictMode>
-  );
+function MyApp({ Component, pageProps }: any) {
+  return <Component {...pageProps} />
 }
 
-export default HomePage;
+export default MyApp
+
