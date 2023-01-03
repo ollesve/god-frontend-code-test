@@ -33,7 +33,7 @@ const getBullets = (totalElementsInCarousel: number, currentIdx: number) => {
         borderRadius: "100%",
         background: "black",
         transition: 'opacity 0.2s linear 0.2s',
-        opacity: currentIdx === i ? "1" : "0.2", //TODO: Fixa transtion?
+        opacity: currentIdx === i ? "1" : "0.2",
       }}>
     </Flex>);
   }

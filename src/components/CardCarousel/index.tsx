@@ -1,28 +1,38 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Flex, TextInput, Block, useTheme } from 'vcc-ui';
+import { Flex, TextInput, Block } from 'vcc-ui';
 import CardToogle from "./CardToogle";
 import CarouselBullets from "./CarouselBullets";
-import { DeviceType } from "../../../types/device";
-import { CarType } from "../../../types/car";
+import { ScreenSizeType } from "../../../types/screenSize";
+import { CardCarouselChildrenType } from "../../../types/cardCarouselChildren";
 
-type CarCardPropsType = {
-  props: { carInfo: CarType }
-}
 
 type CardCarouselPropsType = {
   children: JSX.Element[],
-  device: DeviceType
-  searchFunction?: (children: CarCardPropsType[], input: string) => CarCardPropsType[]
+  screenSize: ScreenSizeType
+  searchFunction?: (children: CardCarouselChildrenType[], input: string) => CardCarouselChildrenType[]
 }
 
-export const CardCarousel = ({ children, device, searchFunction }: CardCarouselPropsType) => {
+const getElementsInCarousel = (screenSize: ScreenSizeType) => {
+  switch (screenSize) {
+    case "S":
+      return 1
+    case "M":
+      return 2
+    default:
+      return 4
+  }
+}
+
+
+export const CardCarousel = ({ children, screenSize, searchFunction }: CardCarouselPropsType) => {
   const [currentIdx, setCurrentIdx] = useState<number>(0)
   const [previousButtonDisabled, setPreviousButtonDisabled] = useState<boolean>(false)
   const [nextButtonDisabled, setNextButtonDisabled] = useState<boolean>(false)
   const carouselRef = useRef<HTMLDivElement>(null)
-  const elementsInCarousel = device === "desktop" ? 4 : (device === "mobile" ? 1 : 2) //TODO: ändra namn till S, M, L
+  const elementsInCarousel = getElementsInCarousel(screenSize)
+
   const [searchInput, setSearchInput] = useState('');
-  const [filteredChildren, setFilteredChildren] = useState<CarCardPropsType[]>(children);
+  const [filteredChildren, setFilteredChildren] = useState<CardCarouselChildrenType[]>(children);
 
 
   useEffect(() => {
@@ -37,7 +47,6 @@ export const CardCarousel = ({ children, device, searchFunction }: CardCarouselP
     }, 200)
   }, [currentIdx, elementsInCarousel, filteredChildren])
 
-
   const nextCard = () => {
     scrollToCard(currentIdx + elementsInCarousel)
   }
@@ -50,7 +59,7 @@ export const CardCarousel = ({ children, device, searchFunction }: CardCarouselP
     carouselRef.current?.children[index]?.scrollIntoView({ behavior: "smooth", inline: "nearest" })
   }
 
-  const handleScroll = (event: React.UIEvent): void => {
+  const handleScroll = (event: React.UIEvent) => {
     const element = event.currentTarget;
     const windowScroll = element.scrollLeft;
     const totalWidth = element.scrollWidth - element.clientWidth;
@@ -60,7 +69,7 @@ export const CardCarousel = ({ children, device, searchFunction }: CardCarouselP
   }
 
   const search = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!searchFunction) return //TODO: Check this
+    if (!searchFunction) return
     const input = e.target.value
     setSearchInput(input);
 
@@ -75,21 +84,24 @@ export const CardCarousel = ({ children, device, searchFunction }: CardCarouselP
         background: "white",
       }}
     >
-      {searchFunction &&
-        <Block extend={{
-          margin: "10px",
-          width: "300px"
-        }}
-        >
-          <TextInput
-            value={searchInput}
-            label="Search"
-            onChange={search}
-          />
-        </Block>}
+      {
+        searchFunction ?
+          <Block extend={{
+            margin: "10px",
+            width: "300px"
+          }}
+          >
+            <TextInput
+              value={searchInput}
+              label="Search"
+              onChange={search}
+            />
+          </Block>
+          :
+          null
+      }
       <Flex
         extend={{
-          height: "355px",
           overflowX: "scroll",
           flexDirection: "row",
           WebkitOverflowScrolling: "touch",
@@ -104,7 +116,7 @@ export const CardCarousel = ({ children, device, searchFunction }: CardCarouselP
       >
         {filteredChildren}
       </Flex>
-      {device === "desktop"
+      {screenSize === "L" || screenSize === "XL"
         ?
         <CardToogle
           previousCardClick={previousCard}
