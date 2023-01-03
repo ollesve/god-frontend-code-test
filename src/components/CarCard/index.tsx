@@ -11,6 +11,7 @@ export const CarCard = ({
   carInfo
 }: CarCardPropsType) => {
 
+  const { bodyType, modelType, modelName, imageUrl, id } = carInfo
 
   return (
     <Flex
@@ -29,16 +30,16 @@ export const CarCard = ({
       }}
     >
       <CardContent>
-        <Text>{carInfo.bodyType}</Text>
+        <Text>{bodyType}</Text>
         <Flex extend={{
           alignItems: "center",
           textAlign: 'left',
           flexDirection: "row",
           height: "32px"
         }}>
-          <Text subStyle="emphasis">{carInfo.modelName}</Text>
+          <Text subStyle="emphasis">{modelName}</Text>
           <Spacer />
-          <Text subStyle="inline-link">{carInfo.modelType}</Text>
+          <Text subStyle="inline-link">{modelType}</Text>
         </Flex>
 
       </CardContent>
@@ -49,7 +50,7 @@ export const CarCard = ({
           padding: "0 0 75% 0"
         }}
       >
-        <Image src={`${carInfo.imageUrl}`} alt={`Volvo car ${carInfo.bodyType} of model ${carInfo.modelName}`} layout='fill' objectFit='contain' />
+        <Image src={`${imageUrl}`} alt={`Volvo car ${bodyType} of model ${modelName} which is a ${modelType}`} layout='fill' objectFit='contain' />
       </Flex>
       <Flex
         extend={{
@@ -58,14 +59,14 @@ export const CarCard = ({
         }}
       >
         <Link
-          href={`/learn/${carInfo.id}`}
+          href={`/learn/${id}`}
           arrow="right"
         >
           Learn
         </Link>
         <Spacer size={5} />
         <Link
-          href={`/shop/${carInfo.id}`}
+          href={`/shop/${id}`}
           arrow="right"
         >
           Shop
