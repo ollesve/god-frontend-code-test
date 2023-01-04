@@ -1,7 +1,7 @@
-import { ExtendCSS } from "vcc-ui"
+import { ExtendCSS, CurrentTheme } from "vcc-ui"
 
-export const cardCarouselContainer: ExtendCSS = {
-  background: "white"
+export const cardCarouselContainer = ({ theme }: { theme: CurrentTheme }) => {
+  return { background: theme.color.background.primary }
 }
 
 export const cardCarouselWrapper: ExtendCSS = {

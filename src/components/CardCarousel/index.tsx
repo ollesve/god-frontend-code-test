@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Flex, TextInput, Block } from 'vcc-ui';
+import { Flex, TextInput, Block, useTheme, ExtendCSS } from 'vcc-ui';
 
 import CardToogle from "../CardToogle";
 import CarouselBullets from "../CarouselBullets";
 import { CardCarouselChildrenType } from "../../../types/cardCarouselChildren";
 import { ScreenSizeType } from "../../../types/screenSize";
 import { cardCarouselContainer, cardCarouselWrapper, searchWrapper } from "./CardCarousel.styles";
-
 
 
 type CardCarouselPropsType = {
