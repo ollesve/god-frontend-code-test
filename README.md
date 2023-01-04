@@ -11,7 +11,8 @@ To get started:
 ## Tests
 
 [Playwright](https://playwright.dev/) is used to perform e2e tests.
-
+    
+    npm run build
     npm run test:e2e
 
 ---
