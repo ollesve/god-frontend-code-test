@@ -1,3 +1,21 @@
+# Olle Svenssons solution to Volvo Cars (Global Online Digital) front-end coding test
+
+## Running locally in development mode
+
+To get started:
+
+    git clone https://github.com/ollesve/god-frontend-code-test
+    npm install
+    npm run dev
+
+## Tests
+
+[Playwright](https://playwright.dev/) is used to perform e2e tests.
+
+    npm run test:e2e
+
+---
+The test provided by Volvo Cars:
 # Volvo Cars (Global Online Digital)
 
 ## Front-end coding test (React)
