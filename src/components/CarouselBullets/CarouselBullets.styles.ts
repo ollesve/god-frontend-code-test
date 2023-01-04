@@ -3,7 +3,8 @@ import { ExtendCSS } from "vcc-ui"
 export const carouselBulletsContainer: ExtendCSS = {
   flexDirection: "row",
   justifyContent: "center",
-  margin: "10px"
+  margin: "10px",
+  height: "18px",
 }
 
 export const bulletStyle: ExtendCSS = {
