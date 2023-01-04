@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Flex, TextInput, Block } from 'vcc-ui';
 
-import CardToogle from "./CardToogle";
-import CarouselBullets from "./CarouselBullets";
+import CardToogle from "../CardToogle";
+import CarouselBullets from "../CarouselBullets";
 import { CardCarouselChildrenType } from "../../../types/cardCarouselChildren";
 import { ScreenSizeType } from "../../../types/screenSize";
+import { cardCarouselContainer, cardCarouselWrapper, searchWrapper } from "./CardCarousel.styles";
 
 
 
@@ -74,16 +75,11 @@ const CardCarousel = ({ children, screenSize, searchFunction }: CardCarouselProp
 
   return (
     <Flex
-      extend={{
-        background: "white",
-      }}
+      extend={cardCarouselContainer}
     >
       {
         searchFunction ?
-          <Block extend={{
-            margin: "10px",
-            width: "300px"
-          }}
+          <Block extend={searchWrapper}
           >
             <TextInput
               value={searchInput}
@@ -95,16 +91,7 @@ const CardCarousel = ({ children, screenSize, searchFunction }: CardCarouselProp
           null
       }
       <Flex
-        extend={{
-          overflowX: "scroll",
-          flexDirection: "row",
-          WebkitOverflowScrolling: "touch",
-          scrollSnapType: "x mandatory",
-          scrollbarWidth: "none",
-          "::-webkit-scrollbar": {
-            display: "none"
-          }
-        }}
+        extend={cardCarouselWrapper}
         ref={carouselRef}
         onScroll={handleScroll}
       >

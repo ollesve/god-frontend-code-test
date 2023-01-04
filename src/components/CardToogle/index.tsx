@@ -1,5 +1,6 @@
 import React from "react";
 import { Flex, IconButton, Spacer } from 'vcc-ui';
+import { cardToogleContainer } from "./CardToogle.styles";
 
 type CardTooglePropsType = {
   previousCardClick: () => void,
@@ -11,11 +12,7 @@ type CardTooglePropsType = {
 export const CardToogle = ({ previousCardClick, nextCardClick, previousButtonDisabled, nextButtonDisabled }: CardTooglePropsType) => {
   return (
     <Flex
-      extend={{
-        flexDirection: "row",
-        justifyContent: "right",
-        padding: "10px",
-      }}
+      extend={cardToogleContainer}
     >
       <IconButton
         aria-label="Previous image"
