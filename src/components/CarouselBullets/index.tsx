@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Flex } from 'vcc-ui';
+import { carouselBulletsContainer, bulletStyle } from "./CarouselBullets.styles";
 
 type CarouselBulletsPropsType = {
   currentIdx: number,
@@ -11,11 +12,7 @@ export const CarouselBullets = ({ currentIdx, totalElementsInCarousel }: Carouse
   let bullets = getBullets(totalElementsInCarousel, currentIdx)
 
   return (
-    <Flex extend={{
-      flexDirection: "row",
-      justifyContent: "center",
-      margin: "10px"
-    }}>
+    <Flex extend={carouselBulletsContainer}>
       {bullets}
     </Flex>
   );
@@ -28,12 +25,7 @@ const getBullets = (totalElementsInCarousel: number, currentIdx: number) => {
     items.push(<Flex
       key={i}
       extend={{
-        margin: "5px",
-        height: "8px",
-        width: "8px",
-        borderRadius: "100%",
-        background: "black",
-        transition: 'opacity 0.2s linear 0.2s',
+        ...bulletStyle,
         opacity: currentIdx === i ? "1" : "0.2",
       }}>
     </Flex>);
